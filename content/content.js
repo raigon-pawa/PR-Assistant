@@ -102,56 +102,60 @@
   function createPanel() {
     var panel = document.createElement('div');
     panel.id = 'pra-panel';
-    panel.innerHTML = [
-      '<div id="pra-header" title="Click to expand/collapse">',
-      '  <div class="pra-logo" style="font-size: 16px; line-height: 1; padding-top: 2px;">✦</div>',
-      '  <div style="flex:1;min-width:0">',
-      '    <div class="pra-title">PR Assistant</div>',
-      '  </div>',
-      '  <button class="pra-toggle-btn" id="pra-toggle" title="Toggle panel">&#9662;</button>',
-      '</div>',
-      '<div id="pra-body">',
-      '  <div class="pra-context" id="pra-context">',
-      '    <div class="pra-pill"><span>' + ctx.repo + '</span></div>',
-      '    <div class="pra-pill">base: <span>' + ctx.base + '</span></div>',
-      '    <div class="pra-pill">head: <span>' + ctx.head + '</span></div>',
-      '  </div>',
-      '  <div class="pra-actions">',
-      '    <button class="pra-btn pra-btn-json" id="pra-btn-json">',
-      '      <span class="pra-btn-icon">{ }</span>',
-      '      Generate JSON',
-      '    </button>',
-      '    <button class="pra-btn pra-btn-claude" id="pra-btn-claude">',
-      '      <span class="pra-btn-icon">AI</span>',
-      '      Use Claude API',
-      '    </button>',
-      '  </div>',
-      '  <div id="pra-model-display" style="text-align: right; font-size: 11px; color: #8b949e; margin-top: 4px; padding-right: 4px;"></div>',
-      '  <div class="pra-status" id="pra-status">',
-      '    <div class="pra-status-dot" id="pra-status-dot"></div>',
-      '    <span id="pra-status-text">Ready - click an action above</span>',
-      '  </div>',
-      '  <div class="pra-output" id="pra-output">',
-      '    <div class="pra-divider"></div>',
-      '    <div id="pra-title-section" style="display:none;flex-direction:column;gap:6px">',
-      '      <div class="pra-result-title-label">PR Title</div>',
-      '      <div class="pra-result-title-box" id="pra-result-title">-</div>',
-      '      <div class="pra-copy-row">',
-      '        <button class="pra-copy-btn" id="pra-copy-title">Copy title</button>',
-      '      </div>',
-      '    </div>',
-      '    <div style="display:flex;flex-direction:column;gap:6px">',
-      '      <div class="pra-result-desc-label" id="pra-output-label">Output</div>',
-      '      <textarea class="pra-result-textarea" id="pra-result-body" readonly rows="8"',
-      '        placeholder="Result will appear here..."></textarea>',
-      '      <div class="pra-copy-row">',
-      '        <button class="pra-copy-btn" id="pra-copy-body">Copy</button>',
-      '        <button class="pra-copy-btn" id="pra-download-json" style="display:none">Download</button>',
-      '      </div>',
-      '    </div>',
-      '  </div>',
-      '</div>'
-    ].join('\n');
+    // Static literal markup only (AMO innerHTML rule); URL-derived values
+    // (repo/base/head) are injected via textContent below, never as HTML.
+    panel.innerHTML =
+      '<div id="pra-header" title="Click to expand/collapse">' +
+      '  <div class="pra-logo" style="font-size: 16px; line-height: 1; padding-top: 2px;">✦</div>' +
+      '  <div style="flex:1;min-width:0">' +
+      '    <div class="pra-title">PR Assistant</div>' +
+      '  </div>' +
+      '  <button class="pra-toggle-btn" id="pra-toggle" title="Toggle panel">&#9662;</button>' +
+      '</div>' +
+      '<div id="pra-body">' +
+      '  <div class="pra-context" id="pra-context">' +
+      '    <div class="pra-pill"><span id="pra-pill-repo"></span></div>' +
+      '    <div class="pra-pill">base: <span id="pra-pill-base"></span></div>' +
+      '    <div class="pra-pill">head: <span id="pra-pill-head"></span></div>' +
+      '  </div>' +
+      '  <div class="pra-actions">' +
+      '    <button class="pra-btn pra-btn-json" id="pra-btn-json">' +
+      '      <span class="pra-btn-icon">{ }</span>' +
+      '      Generate JSON' +
+      '    </button>' +
+      '    <button class="pra-btn pra-btn-claude" id="pra-btn-claude">' +
+      '      <span class="pra-btn-icon">AI</span>' +
+      '      Use Claude API' +
+      '    </button>' +
+      '  </div>' +
+      '  <div id="pra-model-display" style="text-align: right; font-size: 11px; color: #8b949e; margin-top: 4px; padding-right: 4px;"></div>' +
+      '  <div class="pra-status" id="pra-status">' +
+      '    <div class="pra-status-dot" id="pra-status-dot"></div>' +
+      '    <span id="pra-status-text">Ready - click an action above</span>' +
+      '  </div>' +
+      '  <div class="pra-output" id="pra-output">' +
+      '    <div class="pra-divider"></div>' +
+      '    <div id="pra-title-section" style="display:none;flex-direction:column;gap:6px">' +
+      '      <div class="pra-result-title-label">PR Title</div>' +
+      '      <div class="pra-result-title-box" id="pra-result-title">-</div>' +
+      '      <div class="pra-copy-row">' +
+      '        <button class="pra-copy-btn" id="pra-copy-title">Copy title</button>' +
+      '      </div>' +
+      '    </div>' +
+      '    <div style="display:flex;flex-direction:column;gap:6px">' +
+      '      <div class="pra-result-desc-label" id="pra-output-label">Output</div>' +
+      '      <textarea class="pra-result-textarea" id="pra-result-body" readonly rows="8"' +
+      '        placeholder="Result will appear here..."></textarea>' +
+      '      <div class="pra-copy-row">' +
+      '        <button class="pra-copy-btn" id="pra-copy-body">Copy</button>' +
+      '        <button class="pra-copy-btn" id="pra-download-json" style="display:none">Download</button>' +
+      '      </div>' +
+      '    </div>' +
+      '  </div>' +
+      '</div>';
+    panel.querySelector('#pra-pill-repo').textContent = ctx.repo;
+    panel.querySelector('#pra-pill-base').textContent = ctx.base;
+    panel.querySelector('#pra-pill-head').textContent = ctx.head;
     return panel;
   }
 
@@ -183,7 +187,7 @@
   function setCollapsedState(isCollapsed) {
     collapsed = isCollapsed;
     panel.classList.toggle('pra-collapsed', collapsed);
-    elToggle.innerHTML = collapsed ? '&#9656;' : '&#9662;';
+    elToggle.textContent = collapsed ? '▸' : '▾';
   }
 
   function togglePanel() {
