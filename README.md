@@ -19,23 +19,20 @@ A powerful, pure-JS WebExtension that injects a floating panel into GitHub compa
 
 ## Installation (Load Unpacked)
 
-### 1. File Location (Important for Flatpak users)
-If you are using a sandboxed browser (like a Flatpak version of Floorp or Firefox), **make sure the extension folder is located in a visible directory** (like `~/pr-assistant` or `~/Downloads`). Flatpak browsers cannot read resources from hidden dot-folders (like `~/.gemini`).
+Since this extension is not yet published on the Mozilla Add-ons store, you will need to load it as a temporary extension.
 
-### 2. Copy the icon file
-Before loading, copy the generated icon into the `icons/` directory:
-```bash
-cp /home/raigon/.gemini/antigravity/brain/76d1aea7-68eb-484d-b5e3-988b5c0db994/pr_assistant_icon_1783527134233.png icons/icon-96.png
-cp icons/icon-96.png icons/icon-48.png
-```
+1. Clone or download this repository to your local machine:
+   ```bash
+   git clone https://github.com/raigon-pawa/PR-Assistant.git
+   ```
+2. Open your Firefox or Floorp browser and navigate to `about:debugging`.
+3. Click **"This Firefox"** (or "This Floorp") in the left sidebar.
+4. Click **"Load Temporary Add-on…"**.
+5. Navigate to the directory where you cloned the repository and select the **`manifest.json`** file.
 
-### 3. Load in the Browser
-1. Open your browser and navigate to `about:debugging`
-2. Click **"This Firefox"** (or "This Floorp") in the left sidebar
-3. Click **"Load Temporary Add-on…"**
-4. Navigate to the `pr-assistant` directory and select **`manifest.json`**
+> **Note**: Temporary add-ons are removed when the browser restarts. For permanent installation, you can sign the extension via [addons.mozilla.org](https://addons.mozilla.org/).
 
-> **Note**: Temporary add-ons are removed when the browser restarts. For permanent installation, sign the extension via addons.mozilla.org.
+> **Flatpak Users**: If you are using a sandboxed browser (like a Flatpak version), make sure the repository is cloned into a visible directory (like `~/Downloads` or `~/Documents`), as Flatpak browsers cannot read from hidden directories.
 
 ---
 
