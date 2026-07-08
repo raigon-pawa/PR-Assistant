@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>PR Assistant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <div class="pop-header">
+    <div class="pop-logo">✦</div>
+    <div>
+      <div class="pop-title">PR Assistant</div>
+      <div class="pop-subtitle">GitHub × Claude AI</div>
+    </div>
+  </div>
+
+  <div class="pop-body">
+    <div class="pop-status" id="pop-status">
+      <div class="pop-status-dot" id="pop-dot"></div>
+      <span id="pop-status-text">Checking page…</span>
+    </div>
+
+    <div class="pop-divider"></div>
+
+    <div class="pop-info" id="pop-info" style="display:none">
+      <div class="pop-info-row">
+        <span class="pop-info-label">Repo</span>
+        <span class="pop-info-val" id="pop-repo">—</span>
+      </div>
+      <div class="pop-info-row">
+        <span class="pop-info-label">Compare</span>
+        <span class="pop-info-val" id="pop-compare">—</span>
+      </div>
+    </div>
+
+    <div class="pop-not-compare" id="pop-not-compare" style="display:none">
+      <p>Navigate to a GitHub <strong>compare</strong> page to use this extension.</p>
+      <p class="pop-hint">Example: <code>github.com/owner/repo/compare/main...my-branch</code></p>
+    </div>
+  </div>
+
+  <div class="pop-footer">
+    <button class="pop-settings-btn" id="pop-settings-btn">⚙ Settings</button>
+    <span class="pop-version">v1.0.0</span>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PR Assistant Settings</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="options.css" />
+</head>
+<body>
+  <div class="opts-bg"></div>
+
+  <main class="opts-main">
+    <header class="opts-header">
+      <div class="opts-logo">✦</div>
+      <div>
+        <h1 class="opts-title">PR Assistant</h1>
+        <p class="opts-subtitle">Settings &amp; Configuration</p>
+      </div>
+    </header>
+
+    <!-- API Key -->
+    <section class="opts-card">
+      <div class="opts-card-header">
+        <span class="opts-card-icon">🔑</span>
+        <div>
+          <h2 class="opts-card-title">Anthropic API Key</h2>
+          <p class="opts-card-desc">Required for Claude-powered generation. Stored locally, never transmitted to third parties.</p>
+        </div>
+      </div>
+
+      <div class="opts-field">
+        <label class="opts-label" for="api-key">API Key</label>
+        <div class="opts-input-wrap">
+          <input
+            id="api-key"
+            class="opts-input"
+            type="password"
+            placeholder="sk-ant-api03-…"
+            autocomplete="off"
+            spellcheck="false"
+          />
+          <button class="opts-reveal-btn" id="reveal-btn" title="Show/hide key">👁</button>
+        </div>
+        <p class="opts-field-hint">
+          Get your key at
+          <a href="https://console.anthropic.com/account/keys" target="_blank" rel="noopener">console.anthropic.com</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- Model selection -->
+    <section class="opts-card">
+      <div class="opts-card-header">
+        <span class="opts-card-icon">🤖</span>
+        <div>
+          <h2 class="opts-card-title">Model</h2>
+          <p class="opts-card-desc">Choose which Claude model to use for generation.</p>
+        </div>
+      </div>
+
+      <div class="opts-field">
+        <div style="display: flex; justify-content: space-between; align-items: baseline;">
+          <label class="opts-label" for="model-select">Claude Model</label>
+          <button id="fetch-models-btn" class="opts-link-btn" style="font-size: 12px; margin-bottom: 8px;">↻ Fetch available models</button>
+        </div>
+        <select id="model-select" class="opts-select">
+          <option value="claude-sonnet-4-5">claude-sonnet-4-5 (recommended)</option>
+          <option value="claude-opus-4-5">claude-opus-4-5 (most capable)</option>
+          <option value="claude-haiku-3-5">claude-haiku-3-5 (fastest)</option>
+          <option value="claude-3-5-sonnet-latest">claude-3-5-sonnet-latest</option>
+          <option value="claude-3-5-haiku-latest">claude-3-5-haiku-latest</option>
+        </select>
+      </div>
+    </section>
+
+    <!-- System prompt -->
+    <section class="opts-card">
+      <div class="opts-card-header">
+        <span class="opts-card-icon">📝</span>
+        <div>
+          <h2 class="opts-card-title">Custom System Prompt</h2>
+          <p class="opts-card-desc">Override the default system prompt. Leave blank to use the built-in prompt.</p>
+        </div>
+      </div>
+
+      <div class="opts-field">
+        <label class="opts-label" for="system-prompt">System Prompt</label>
+        <textarea
+          id="system-prompt"
+          class="opts-textarea"
+          rows="6"
+          placeholder="Based on this diff, write a concise PR title and a description in markdown. Output as:
+TITLE: <title>
+BODY:
+<description>"
+        ></textarea>
+        <button class="opts-link-btn" id="reset-prompt">↺ Reset to default</button>
+      </div>
+    </section>
+
+    <!-- Save -->
+    <div class="opts-actions">
+      <div class="opts-save-status" id="save-status"></div>
+      <button class="opts-save-btn" id="save-btn">Save Settings</button>
+    </div>
+  </main>
+
+  <script src="options.js"></script>
+</body>
+</html>

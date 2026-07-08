@@ -1,0 +1,41 @@
+{
+  "manifest_version": 2,
+  "name": "GitHub PR Assistant",
+  "version": "1.1.0",
+  "description": "Generate PR titles & descriptions using AI directly from GitHub compare pages.",
+  "icons": {
+    "48": "icons/icon-48.png",
+    "96": "icons/icon-96.png"
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "activeTab",
+    "*://github.com/*",
+    "*://api.anthropic.com/*"
+  ],
+  "background": {
+    "scripts": ["background/background.js"],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://github.com/*/compare/*"],
+      "js": ["content/content.js"],
+      "css": ["content/content.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "browser_action": {
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "48": "icons/icon-48.png",
+      "96": "icons/icon-96.png"
+    },
+    "default_title": "GitHub PR Assistant"
+  },
+  "options_ui": {
+    "page": "options/options.html",
+    "browser_style": false
+  }
+}
